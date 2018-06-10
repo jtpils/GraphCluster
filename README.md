@@ -1,8 +1,9 @@
 # Graph Cluster Software Package
 
-This software package is used to partition numerous of images into different clusters under the background of large scale image-based 3D reconstruction. The software can partition the images in less than 5 minutes except the feature extraction process for about 1,000 images. The number of clusters can be set by your need.
+This software package is used to partition numerous of images into different clusters under the background of large scale image-based 3D reconstruction. The software can partition the images in less than 5 minutes except the feature extraction process for about 1,000 images. The number of clusters can be set by your need. You could use this software to partition large scale images into clusters that *independent* or *interdependent*. **Independent** means the partitioned clusters doesn't share common images(or cameras), **Interdependent** means the partitioned clusters have some common images. More details are given below.
 
 ## 1. Dependencies
+- OpenCV 2.8 above.
 - Eigen3. A fast linear algebra library implemented in C++.
 - STLplus. STLplus is a collection of reusable C++ components for developers already familiar with the STL. It contains template containers to extend the STL, reusable subsystems, data persistence (serialisation) and portability components.
 - Graclus. A library used for fast normalized cut, implemented in C. I make some modifications to meet my requirements. 
@@ -54,6 +55,6 @@ The match.out file contains the search results.
 
 ### (3) Graph Cluster
 ```
-$ build/bin/GraphCluster absolute_image_list_path absolute_matchout_path cluster_num
+$ build/bin/GraphCluster absolute_image_list_path absolute_matchout_path cluster_option max_img_num completeness_ratio
 ```
-*absolute_image_list_path* is the absolute path of the image_list file, *absolute_matchout_file* is the absolute path of the match.out file, *cluster_num* is the number of clusters you want to partitiioned. 
+*absolute_image_list_path* is the absolute path of the image_list file, *absolute_matchout_file* is the absolute path of the match.out file, *cluster_option* is the option of clusters you want to partition, you could only set it by "naive" or "expansion", *max_img_num" is the max number of each cluster that you want to partition, *completeness_ratio* is the ratio that measure the repeateness of adjacent clusters, *0.7* is suggested in large scale partition.
