@@ -2,8 +2,6 @@
 
 This software package is used to partition numerous of images into different clusters under the background of large scale image-based 3D reconstruction. The software can partition the images in less than 5 minutes except the feature extraction process for about 1,000 images. The number of clusters can be set by your need.
 
-**All copyright reserved by Yu Chen, IkingTec co. ltd.**
-
 ## 1. Dependencies
 - Eigen3. A fast linear algebra library implemented in C++.
 - STLplus. STLplus is a collection of reusable C++ components for developers already familiar with the STL. It contains template containers to extend the STL, reusable subsystems, data persistence (serialisation) and portability components.
