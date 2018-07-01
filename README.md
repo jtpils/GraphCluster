@@ -35,7 +35,6 @@ cd /usr/src/gtest
 sudo mkdir build
 cd build
 sudo cmake ..
-cd ..
 sudo make
 sudo cp libgtest* /usr/lib/
 cd ..
@@ -43,32 +42,32 @@ sudo rm -rf build
 ```
 
 ### (3) Build the software package
+```bash
+cd GraphCluster
+mkdir build && cd build
+cmake -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
+make [-j threads]
 ```
- $ cd GraphCluster
- $ mkdir build && cd build
- $ cmake -D CUDA_USE_STATIC_CUDA_RUNTIME=OFF ..
- $ make [-j threads]
- ```
 
 ## 3. How to use
 All the execution files are included in the *build/bin* subdirectory. I will give an example on how to use it on Linux operating system (For the use of Windows, you may try other commands).
 ### (1) Extract Feature Points
-```
-$ ls -d $PWD/*.jpg > image_list
-$ build/bin/libvot_feature image_list && mkdir sift && mv *.sift sift
+```bash
+ls -d $PWD/*.jpg > image_list
+build/bin/libvot_feature image_list && mkdir sift && mv *.sift sift
 ```
 
 ### (2) Image Similarity Search
-```
-$ ls -d $PWD/sift/*.sift > sift_list
-$ mkdir voc && build/bin/image_search sift_list voc
-$ mv voc/match.out .
+```bash
+ls -d $PWD/sift/*.sift > sift_list
+mkdir voc && build/bin/image_search sift_list voc
+mv voc/match.out .
 ```
 The match.out file contains the search results.
 
 ### (3) Graph Cluster
-```
-$ build/bin/GraphCluster absolute_image_list_path absolute_matchout_path cluster_option max_img_num completeness_ratio
+```bash
+build/bin/GraphCluster absolute_image_list_path absolute_matchout_path cluster_option max_img_num completeness_ratio
 ```
 - ***absolute_image_list_path*** is the absolute path of the image_list file
 - ***absolute_matchout_file*** is the absolute path of the match.out file
