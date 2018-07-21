@@ -50,6 +50,8 @@ make [-j threads]
 ```
 
 ## 3. How to use
+
+### Use exe independently
 All the execution files are included in the *build/bin* subdirectory. I will give an example on how to use it on Linux operating system (For the use of Windows, you may try other commands).
 ### (1) Extract Feature Points
 ```bash
@@ -74,3 +76,21 @@ build/bin/GraphCluster absolute_image_list_path absolute_matchout_path cluster_o
 - ***cluster_option*** is the option of clusters you want to partition, you could only set it by "naive" or "expansion"
 - ***max_img_num*** is the max number of each cluster that you want to partition 
 - ***completeness_ratio*** is the ratio that measure the repeateness of adjacent clusters, *0.7* is suggested in large scale partition.
+
+### Use shell script
+To simplify the use of this software, I provide a script to run on Linux.
+The file included in ```script/``` folder, named ```graph_cluster.sh```.
+- Usage
+```bash
+cd script/
+sudo chmod +x graph_cluster.sh 
+./graph_cluster.sh img_dir cluster_option max_img_num completeness_ratio img_format
+```
+- ***img_dir*** is directory of images stored on your disk
+- ***cluster_option*** is the option of clusters you want to partition, you could only set it by "naive" or "expansion"
+- ***max_img_num*** is the max number of each cluster that you want to partition 
+- ***completeness_ratio*** is the ratio that measure the repeateness of adjacent clusters, *0.7* is suggested in large scale partition.
+- ***img_format*** is the format of your images, you should just use the filename suffix. For example, the image is JPG/jpg format, you should set the parameter of **JPG/jpg**, and it's case sensitive.
+
+## 4. License
+The BSD 3-Clause License
