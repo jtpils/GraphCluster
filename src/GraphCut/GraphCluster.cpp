@@ -128,22 +128,39 @@ void GraphCluster::MoveImages(queue<shared_ptr<ImageGraph>> imageGraphs, string 
 
 void GraphCluster::MoveImages(vector<shared_ptr<ImageGraph>> imageGraphs, string dir)
 {
+    ofstream out_graph(dir + "/graph.txt");
+    if(!out_graph.is_open()) {
+        cout << "graph.txt cannot be created!\n";
+        return;
+    }
+
+    ofstream out_cluster(dir + "/clusters.txt");
+    if(!out_cluster.is_open()) {
+        cout << "clusters.txt cannot be created!\n";
+        return;
+    }
+
     for(int i = 0; i < imageGraphs.size(); i++) {
         std::vector<ImageNode> img_nodes = imageGraphs[i]->GetImageNode();
+        string sub_folder = dir + "/image_part_" + std::to_string(i);
+        out_cluster << sub_folder << "\n";
 
-        if(!stlplus::folder_create(dir + "/image_part_" + std::to_string(i))) {
+        if(!stlplus::folder_create(sub_folder)) {
             cerr << "image part " << i << " cannot be created!" << endl;
         }
 
         for(auto inode : img_nodes) {
             string filename = stlplus::filename_part(inode.image_name);
-            string new_file = dir + "/image_part_" + std::to_string(i) + "/" + filename;
+            out_graph << inode.idx << " ";
+            string new_file = sub_folder + "/" + filename;
             if(!stlplus::file_copy(inode.image_name, new_file)) {
                 cout << "cannot copy " << inode.image_name << " to " << new_file << endl;
             }
         }
+        out_graph << "\n";
     }
-
+    out_graph.close();
+    out_cluster.close();
 }
 
 pair<shared_ptr<ImageGraph>, shared_ptr<ImageGraph>> GraphCluster::BiPartition(ImageGraph imageGraph, string dir)
