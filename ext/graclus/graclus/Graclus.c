@@ -56,7 +56,8 @@ Graclus normalizedCut(char* filename, int nparts)
   }
   else 
   {
-    for (int i = 0; i < graph.ncon; i++)
+    int i;
+    for (i = 0; i < graph.ncon; i++)
       rubvec[i] = HORIZONTAL_IMBALANCE;
   }
 
